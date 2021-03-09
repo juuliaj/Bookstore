@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>Bookstore</h1>
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -29,14 +30,19 @@
 				<td th:text="${book.isbn}"></td>
 				<td th:text="${book.year}"></td>
 				<td th:text="${book.category.name}"></td>
-				<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-xs btn-danger">Delete</a></td>    		
 				<td><a class="btn btn-success" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
 			</tr>
 		</tbody>
 	</table>
 
-	<form action="http://localhost:8080/add">
-		<input class="btn btn-success" type="submit" value="Add book" />
-	</form>
+	<a class="btn btn-success" href="/add">Add Book</a>
+	
+	 <body>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+    
 </body>
 </html>

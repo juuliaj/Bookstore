@@ -9,6 +9,8 @@ import com.example.demo.domain.Book;
 import com.example.demo.domain.BookRepository;
 import com.example.demo.domain.Category;
 import com.example.demo.domain.CategoryRepository;
+import com.example.demo.domain.User;
+import com.example.demo.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -18,7 +20,7 @@ public class BookstoreApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository catRepository) {
+	public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository catRepository, UserRepository userRepository) {
 	return (args) -> {
 		
 		Category c1 = new Category("Crafts");
@@ -36,6 +38,14 @@ public class BookstoreApplication {
 		bookRepository.save(a);
 		bookRepository.save(b);
 		bookRepository.save(c);
+		
+		User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6",  "user@user.fi", "USER");
+		User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C",  "admin@admin.fi", "ADMIN");
+		
+		userRepository.save(user1);
+		userRepository.save(user2);
+		
+		
 	};
 	}
 
