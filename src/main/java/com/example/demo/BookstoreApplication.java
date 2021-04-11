@@ -22,6 +22,9 @@ public class BookstoreApplication {
 	@Bean
 	public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository catRepository, UserRepository userRepository) {
 	return (args) -> {
+		bookRepository.deleteAll();
+		catRepository.deleteAll();
+		userRepository.deleteAll();
 		
 		Category c1 = new Category("Crafts");
 		Category c2 = new Category("Environment");
